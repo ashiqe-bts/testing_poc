@@ -49,7 +49,8 @@ describe('UsersController POC', () => {
       designation: 'Intern',
     });
 
-    await controller.update(user.id, {
+    await controller.update({
+      id: user.id,
       name: 'NewName',
       age: 26,
       designation: 'Associate',
