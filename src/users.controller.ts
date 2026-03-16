@@ -8,7 +8,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   async create(body: CreateUserDto) {
-    return this.usersService.create(body.name);
+    return this.usersService.create(body.name, body.age, body.designation);
   }
 
   async findAll() {
@@ -16,7 +16,12 @@ export class UsersController {
   }
 
   async update(id: number, body: UpdateUserDto) {
-    return this.usersService.update(id, body.name);
+    return this.usersService.update(
+      id,
+      body.name,
+      body.age,
+      body.designation,
+    );
   }
 
   async delete(id: number) {
