@@ -22,7 +22,7 @@ describe('UsersController POC', () => {
   });
 
   it('should create user', async () => {
-    const dto = { name: 'John', age: 30, designation: 'Engineer' };
+    const dto = { name: 'John', age: 30, designation: 'Engineer', email: 'john@example.com' };
     const user = await controller.create(dto);
 
     const users = await prisma.user.findMany();
@@ -30,12 +30,13 @@ describe('UsersController POC', () => {
     expect(user.name).toBe('John');
     expect(user.age).toBe(30);
     expect(user.designation).toBe('Engineer');
+    expect(user.email).toBe('john@example.com');
     expect(users.length).toBe(1);
   });
 
   it('should read users', async () => {
-    await controller.create({ name: 'Alice', age: 28, designation: 'Analyst' });
-    await controller.create({ name: 'Bob', age: 35, designation: 'Manager' });
+    await controller.create({ name: 'Alice', age: 28, designation: 'Analyst', email: 'alice@example.com' });
+    await controller.create({ name: 'Bob', age: 35, designation: 'Manager', email: 'bob@example.com' });
 
     const users = await controller.findAll();
 
@@ -47,6 +48,7 @@ describe('UsersController POC', () => {
       name: 'OldName',
       age: 25,
       designation: 'Intern',
+      email: 'old@example.com',
     });
 
     await controller.update({
@@ -54,6 +56,7 @@ describe('UsersController POC', () => {
       name: 'NewName',
       age: 26,
       designation: 'Associate',
+      email: 'new@example.com',
     });
 
     const updated = await prisma.user.findUnique({ where: { id: user.id } });
@@ -61,6 +64,7 @@ describe('UsersController POC', () => {
     expect(updated?.name).toBe('NewName');
     expect(updated?.age).toBe(26);
     expect(updated?.designation).toBe('Associate');
+    expect(updated?.email).toBe('new@example.com');
   });
 
   it('should delete user', async () => {
@@ -68,6 +72,7 @@ describe('UsersController POC', () => {
       name: 'DeleteMe',
       age: 31,
       designation: 'Consultant',
+      email: 'deleteme@example.com',
     });
 
     await controller.delete(user.id);
