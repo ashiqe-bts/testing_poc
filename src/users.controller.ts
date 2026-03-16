@@ -7,21 +7,16 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  async create(body: CreateUserDto) {
-    return this.usersService.create(body.name, body.age, body.designation);
+  async create(dto: CreateUserDto) {
+    return this.usersService.create(dto.name, dto.age, dto.designation);
   }
 
   async findAll() {
     return this.usersService.findAll();
   }
 
-  async update(id: number, body: UpdateUserDto) {
-    return this.usersService.update(
-      id,
-      body.name,
-      body.age,
-      body.designation,
-    );
+  async update(dto: UpdateUserDto) {
+    return this.usersService.update(dto.id, dto.name, dto.age, dto.designation);
   }
 
   async delete(id: number) {
