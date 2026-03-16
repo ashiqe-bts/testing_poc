@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
+import { IsEmail, IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
 
 export class UpdateUserDto {
   @Type(() => Number)
@@ -19,4 +19,8 @@ export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()
   designation!: string;
+
+  @IsEmail()
+  @IsNotEmpty()
+  email!: string;
 }

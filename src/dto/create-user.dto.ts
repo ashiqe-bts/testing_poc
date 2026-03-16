@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
+import { IsEmail, IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -14,4 +14,8 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   designation!: string;
+
+  @IsEmail()
+  @IsNotEmpty()
+  email!: string;
 }
