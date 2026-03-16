@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
@@ -8,6 +9,8 @@ describe('UsersController POC', () => {
   let prisma: PrismaService;
 
   beforeAll(async () => {
+    execSync('npx prisma db push --skip-generate', { stdio: 'ignore' });
+
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [UsersService, PrismaService],
