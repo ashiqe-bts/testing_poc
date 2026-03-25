@@ -5,26 +5,31 @@ import { PrismaService } from './prisma.service';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(name: string, age: number, designation: string, email: string) {
+  create(name: string) {
     return this.prisma.user.create({
-      data: { name, age, designation, email },
+      data: { name },
+      select: { id: true, name: true },
     });
   }
 
   findAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      select: { id: true, name: true },
+    });
   }
 
-  update(id: number, name: string, age: number, designation: string, email: string) {
+  update(id: number, name: string) {
     return this.prisma.user.update({
       where: { id },
-      data: { name, age, designation, email },
+      data: { name },
+      select: { id: true, name: true },
     });
   }
 
   remove(id: number) {
     return this.prisma.user.delete({
       where: { id },
+      select: { id: true, name: true },
     });
   }
 }
